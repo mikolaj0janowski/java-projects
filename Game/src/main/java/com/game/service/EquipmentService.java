@@ -37,10 +37,10 @@ public class EquipmentService {
         equipmentRepository.deleteById(id);
     }
 
-    public void saveNewEquipment(EquipmentInput input) {
+    public EquipmentEntity saveNewEquipment(EquipmentInput input) {
         if (validateInput(input)) {
             EquipmentEntity equipmentEntity = prepareEquipmentEntity(input);
-            equipmentRepository.save(equipmentEntity);
+            return equipmentRepository.save(equipmentEntity);
         } else {
             throw new IllegalArgumentException("wrong input");
         }
@@ -132,6 +132,6 @@ public class EquipmentService {
                 .orElse(null);
         CharacterEntity characterEntity = characterRepository.findById(input.getOwnerID())
                 .orElse(null);
-        return (itemEntity == null || characterEntity == null);
+        return !(itemEntity == null || characterEntity == null);
     }
 }

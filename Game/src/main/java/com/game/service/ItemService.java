@@ -45,10 +45,10 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
-    public void saveNewItem(ItemInput build) {
+    public ItemEntity saveNewItem(ItemInput build) {
         if (validateInput(build)) {
             ItemEntity itemEntity = prepareItemEntity(build);
-            itemRepository.save(itemEntity);
+            return itemRepository.save(itemEntity);
         } else {
             throw new IllegalArgumentException("wrong input");
         }
